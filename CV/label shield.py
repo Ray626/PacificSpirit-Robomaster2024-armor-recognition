@@ -24,7 +24,7 @@ def getContour(img):
     lengthArr = []
     pointArr = []
 
-    for conts in contours[:5]:
+    for conts in contours[1:5]:
         x, y, w, h = cv2.boundingRect(conts)
         try:
             if h / w >= 2 and h / frameHeight > 0.01:
@@ -80,5 +80,5 @@ while True:
     img = cv2.resize(img, (frameWidth, frameHeight))
     img= getContour(img)
     cv2.imshow("Result", img)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(17) & 0xFF == ord('q'):
         break
