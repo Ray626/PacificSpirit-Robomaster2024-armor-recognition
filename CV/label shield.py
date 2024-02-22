@@ -24,15 +24,19 @@ def getContour(img):
     lengthArr = []
     pointArr = []
 
-    for conts in contours[1:5]:
-        x, y, w, h = cv2.boundingRect(conts)
-        try:
-            if h / w >= 2 and h / frameHeight > 0.01:
-                widthArr.append(w)
-                lengthArr.append(h)
-                pointArr.append([x,y])
-        except:
-            continue
+    for conts in contours[:5]:
+        area = cv2.contourArea(conts)
+        print(area)
+        if area > 500:
+            x, y, w, h = cv2.boundingRect(conts)
+            try:
+                if h / w >= 2 and h / frameHeight > 0.01:
+                    cv2.drawContours(img, conts, -1, (255, 255, 50), 3)
+                    widthArr.append(w)
+                    lengthArr.append(h)
+                    pointArr.append([x, y])
+            except:
+                continue
 
     point = [0,0]
 
